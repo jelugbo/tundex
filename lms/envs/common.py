@@ -825,7 +825,7 @@ PAYMENT_SUPPORT_EMAIL = 'payment@example.com'
 
 ##### Using cybersource by default #####
 
-CC_PROCESSOR_NAME = 'CyberSource'
+CC_PROCESSOR_NAME = 'PayPal'
 CC_PROCESSOR = {
     'CyberSource': {
         'SHARED_SECRET': '',
@@ -833,6 +833,14 @@ CC_PROCESSOR = {
         'SERIAL_NUMBER': '',
         'ORDERPAGE_VERSION': '7',
         'PURCHASE_ENDPOINT': '',
+    },
+    'PayPal': {
+        'USER_ID': 'bjquickfix_api1.gmail.com',
+        'USER_PWD': 'GYG8HHAK2WJCCTL4',
+        'USER_SIGN': 'An5ns1Kso7MWUdW4ErQKJJJ4qi4-Axqc.JXhbp4NyLlOiuwGYs6H2Hqx',
+        'API_VERSION': '78',
+        'ORDERID_PREFIX': 'HEBS_ ',
+        'PROCESS_URL': 'https://api-3t.sandbox.paypal.com/nvp',
     },
     'CyberSource2': {
         "PURCHASE_ENDPOINT": '',
