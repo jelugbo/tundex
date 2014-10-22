@@ -494,6 +494,24 @@ def donate(request):
 
     return HttpResponse(response_params, content_type="text/json")
 
+@login_required
+def start_payment(request):
+    """
+    This is the entry point that *can* be used when the user clicks 'Buy' (or something similar).
+    Certain processor modules (such as CyberSource) will not use this entry point because they immediately
+    redirect to a 3rd party from the webform itself.
+    However, in other cases (such as Paypal), we need to do some server-side setup before
+    control can be turned over to the 3rd party payment provider.
+    """
+    params = request.POST.dict()
+
+    result = start_payment_process(params)
+    if result['success'] and 'redirect_url' in result:
+        return HttpResponseRedirect(result['redirect_url'])
+    else:
+        return render_to_response('shoppingcart/error.html', {'order': result['order'],
+                                                              'error_html': result['error_html']})
+
 
 @csrf_exempt
 @require_POST
