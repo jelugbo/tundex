@@ -23,7 +23,7 @@ def render_purchase_form_html(cart):
     we will turn around and setup the redirect to the SaferPay website
     """
     return render_to_string('shoppingcart/paypal_form.html', {
-        'action': reverse('shoppingcart.views.start_payment'),
+        'action': 'TESTING',
         'params': {
             'order_id': cart.id,
         },
