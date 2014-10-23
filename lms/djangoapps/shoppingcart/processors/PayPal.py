@@ -81,14 +81,18 @@ def sign(params, signed_fields_key='orderPage_signedFields', full_sig_key='order
     params needs to be an ordered dict, b/c cybersource documentation states that order is important.
     Reverse engineered from PHP version provided by cybersource
     """
-    merchant_id = get_processor_config().get('MERCHANT_ID', '')
-    order_page_version = get_processor_config().get('ORDERPAGE_VERSION', '7')
-    serial_number = get_processor_config().get('SERIAL_NUMBER', '')
+    user_id = get_processor_config().get('USER_ID', '')
+    user_pwd = get_processor_config().get('USER_PWD', '')
+    user_sign = get_processor_config().get('USER_SIGN', '')
+    api_version = get_processor_config().get('API_VERSION', '78')
+    #serial_number = get_processor_config().get('SERIAL_NUMBER', '')
 
-    params['merchantID'] = merchant_id
-    params['orderPage_timestamp'] = int(time.time() * 1000)
-    params['orderPage_version'] = order_page_version
-    params['orderPage_serialNumber'] = serial_number
+    params['USER'] = user_id
+    params['PWD'] = user_pwd
+    params['SIGNATURE'] = user_sign
+    #params['orderPage_timestamp'] = int(time.time() * 1000)
+    params['VERSION'] = api_version
+    #params['orderPage_serialNumber'] = serial_number
     fields = u",".join(params.keys())
     values = u",".join([u"{0}={1}".format(i, params[i]) for i in params.keys()])
     fields_sig = processor_hash(fields)
@@ -120,7 +124,7 @@ def render_purchase_form_html(cart, **kwargs):
     """
     Renders the HTML of the hidden POST form that must be used to initiate a purchase with CyberSource
     """
-    return render_to_string('shoppingcart/cybersource_form.html', {
+    return render_to_string('shoppingcart/paypal_form.html', {
         'action': get_purchase_endpoint(),
         'params': get_signed_purchase_params(cart),
     })
@@ -135,16 +139,16 @@ def get_purchase_params(cart):
     amount = "{0:0.2f}".format(total_cost)
     cart_items = cart.orderitem_set.all()
     params = OrderedDict()
-    params['amount'] = amount
+    params['AMT'] = amount
     params['currency'] = cart.currency
-    params['orderPage_transactionType'] = 'sale'
+    params['PAYMENTACTION'] = 'sale'
     params['orderNumber'] = "{0:d}".format(cart.id)
 
     return params
 
 
 def get_purchase_endpoint():
-    return get_processor_config().get('PURCHASE_ENDPOINT', '')
+    return get_processor_config().get('PROCESS_URL', '')
 
 
 def payment_accepted(params):
