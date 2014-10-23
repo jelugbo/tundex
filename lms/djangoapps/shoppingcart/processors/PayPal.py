@@ -53,23 +53,23 @@ def start_payment_process(params):
         description += item.line_desc + '\n'
 
     data = {
-        'USER': settings.CC_PROCESSOR['PayPal'].get('USER_ID', ''),
-        'PWD': settings.CC_PROCESSOR['PayPal'].get('USER_PWD', ''),
-        'SIGNATURE': settings.CC_PROCESSOR['PayPal'].get('USER_SIGN', ''),
-        'VERSION': settings.CC_PROCESSOR['PayPal'].get('API_VERSION', '78'),
+        'USER': get_processor_config().get('USER_ID', ''),
+        'PWD': get_processor_config().get('USER_PWD', ''),
+        'SIGNATURE': get_processor_config().get('USER_SIGN', ''),
+        'VERSION': get_processor_config().get('API_VERSION', ''),
         'METHOD': 'DoDirectPayment',
         'PAYMENTACTION': 'SALE',
         'AMT' : int(order.total_cost * 100),
         'AMOUNT': int(order.total_cost * 100),
         'CURRENCY': order.currency.upper(),
         'DESCRIPTION': description,
-        'ORDERID': settings.CC_PROCESSOR['PayPal'].get('ORDERID_PREFIX', '') + str(order_id),
+        'ORDERID': get_processor_config().get('ORDERID_PREFIX', '') + str(order_id),
         #
         # Pass in callback links to SaferPay when the user completes the payment forms and
         # control is passed back to Open edX
         #
-       # 'SUCCESSLINK': callback_url_domain + reverse('shoppingcart.views.postpay_callback') + '?order_id={0}'.format(order_id),
-       #  'BACKLINK': callback_url_domain + reverse('shoppingcart.views.show_cart'),
+        'RETURNURL': callback_url_domain + reverse('shoppingcart.views.postpay_callback') + '?order_id={0}'.format(order_id),
+        'CANCELURL': callback_url_domain + reverse('shoppingcart.views.show_cart'),
        # 'FAILLINK': callback_url_domain + reverse('shoppingcart.views.show_cart'),
     }
 

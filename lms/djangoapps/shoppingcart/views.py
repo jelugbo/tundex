@@ -38,7 +38,7 @@ from .models import (
     Donation, DonationConfiguration
 )
 from .processors import (
-    process_postpay_callback, render_purchase_form_html,
+    process_postpay_callback, render_purchase_form_html, start_payment_process,
     get_signed_purchase_params, get_purchase_endpoint
 )
 
