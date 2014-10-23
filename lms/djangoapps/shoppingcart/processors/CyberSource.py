@@ -121,7 +121,7 @@ def render_purchase_form_html(cart, **kwargs):
     Renders the HTML of the hidden POST form that must be used to initiate a purchase with CyberSource
     """
     return render_to_string('shoppingcart/cybersource_form.html', {
-        'action': get_purchase_endpoint(),
+        'action': 'shoppingcart/cybersource_pay.html',
         'params': get_signed_purchase_params(cart),
     })
 
