@@ -38,15 +38,15 @@ from lms.lib.xblock.mixin import LmsBlockMixin
 
 ################################### FEATURES ###################################
 # The display name of the platform to be used in templates/emails/etc.
-PLATFORM_NAME = "Your Platform Name Here"
+PLATFORM_NAME = "HEBS"
 CC_MERCHANT_NAME = PLATFORM_NAME
 
-PLATFORM_FACEBOOK_ACCOUNT = "http://www.facebook.com/YourPlatformFacebookAccount"
-PLATFORM_TWITTER_ACCOUNT = "@YourPlatformTwitterAccount"
-PLATFORM_TWITTER_URL = "https://twitter.com/YourPlatformTwitterAccount"
-PLATFORM_MEETUP_URL = "http://www.meetup.com/YourMeetup"
-PLATFORM_LINKEDIN_URL = "http://www.linkedin.com/company/YourPlatform"
-PLATFORM_GOOGLE_PLUS_URL = "https://plus.google.com/YourGooglePlusAccount/"
+PLATFORM_FACEBOOK_ACCOUNT = "http://www.facebook.com/HEBS"
+PLATFORM_TWITTER_ACCOUNT = "@hebsonline"
+PLATFORM_TWITTER_URL = "https://twitter.com/hebsonline"
+PLATFORM_MEETUP_URL = "http://www.meetup.com/HEBS"
+PLATFORM_LINKEDIN_URL = "http://www.linkedin.com/company/HEBS"
+PLATFORM_GOOGLE_PLUS_URL = "https://plus.google.com/+HEBS/"
 
 
 COURSEWARE_ENABLED = True
@@ -203,13 +203,13 @@ FEATURES = {
     'MULTIPLE_ENROLLMENT_ROLES': False,
 
     # Toggle the availability of the shopping cart page
-    'ENABLE_SHOPPING_CART': False,
+    'ENABLE_SHOPPING_CART': True,
 
     # Toggle storing detailed billing information
     'STORE_BILLING_INFO': False,
 
     # Enable flow for payments for course registration (DIFFERENT from verified student flow)
-    'ENABLE_PAID_COURSE_REGISTRATION': False,
+    'ENABLE_PAID_COURSE_REGISTRATION': True,
 
     # Automatically approve student identity verification attempts
     'AUTOMATIC_VERIFY_STUDENT_IDENTITY_FOR_TESTING': False,
@@ -833,11 +833,17 @@ CC_PROCESSOR = {
         'SERIAL_NUMBER': '',
         'ORDERPAGE_VERSION': '7',
         'PURCHASE_ENDPOINT': '',
+        'USER_ID': 'tunde-facilitator_api1.advancio.com',
+        'USER_PWD': '1382459546',
+        'USER_SIGN': 'AdeLDFQ369MS-Sjm7XpfhnTxQ0j-A7AC9DpZ2YTF7qKL5TZIlODfg35j',
+        'API_VERSION': '78',
+        'ORDERID_PREFIX': 'HEBS_ ',
+        'PROCESS_URL': 'https://api-3t.sandbox.paypal.com/nvp',
     },
     'PayPal': {
-        'USER_ID': 'bjquickfix_api1.gmail.com',
-        'USER_PWD': 'GYG8HHAK2WJCCTL4',
-        'USER_SIGN': 'An5ns1Kso7MWUdW4ErQKJJJ4qi4-Axqc.JXhbp4NyLlOiuwGYs6H2Hqx',
+        'USER_ID': 'tunde-facilitator_api1.advancio.com',
+        'USER_PWD': '1382459546',
+        'USER_SIGN': 'AdeLDFQ369MS-Sjm7XpfhnTxQ0j-A7AC9DpZ2YTF7qKL5TZIlODfg35j',
         'API_VERSION': '78',
         'ORDERID_PREFIX': 'HEBS_ ',
         'PROCESS_URL': 'https://api-3t.sandbox.paypal.com/nvp',
