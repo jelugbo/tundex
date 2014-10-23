@@ -142,6 +142,7 @@ def get_purchase_params(cart):
     params['AMT'] = amount
     params['currency'] = cart.currency
     params['PAYMENTACTION'] = 'sale'
+    params['METHOD'] = 'DoDirectPayment'
     params['orderNumber'] = "{0:d}".format(cart.id)
 
     return params
