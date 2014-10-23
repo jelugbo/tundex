@@ -309,7 +309,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <div class="notice notice-incontext notice-instruction notice-instruction-creationrights ui-toggle-target" id="instruction-creationrights">
           <div class="copy">
-            <p>${_('edX Studio is a hosted solution for our xConsortium partners and selected guests. Courses for which you are a team member appear above for you to edit, while course creator privileges are granted by edX. Our team will evaluate your request and provide you feedback within 24 hours during the work week.')}</p>
+            <p>${_('HEBS Studio is a hosted solution for our HEBS partners and selected guests. Courses for which you are a team member appear above for you to edit, while course creator privileges are granted by HEBS. Our team will evaluate your request and provide you feedback within 24 hours during the work week.')}</p>
           </div>
 
           <div class="status status-creationrights is-unrequested">
@@ -332,7 +332,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <div class="notice notice-incontext notice-instruction notice-instruction-creationrights ui-toggle-target" id="instruction-creationrights">
           <div class="copy">
-            <p>${_('edX Studio is a hosted solution for our xConsortium partners and selected guests. Courses for which you are a team member appear above for you to edit, while course creator privileges are granted by edX. Our team is has completed evaluating your request.')}</p>
+            <p>${_('HEBS Studio is a hosted solution for our HEBS partners and selected guests. Courses for which you are a team member appear above for you to edit, while course creator privileges are granted by HEBS. Our team is has completed evaluating your request.')}</p>
           </div>
 
           <div class="status status-creationrights has-status is-denied">
@@ -343,7 +343,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
               <dd class="value">
                 <span class="status-indicator"></span>
                 <span class="value-formal">${_('Denied')}</span>
-                <span class="value-description">${_('Your request did not meet the criteria/guidelines specified by edX Staff.')}</span>
+                <span class="value-description">${_('Your request did not meet the criteria/guidelines specified by HEBS Staff.')}</span>
               </dd>
             </dl>
           </div>
@@ -358,7 +358,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <div class="notice notice-incontext notice-instruction notice-instruction-creationrights ui-toggle-target" id="instruction-creationrights">
           <div class="copy">
-            <p>${_('edX Studio is a hosted solution for our xConsortium partners and selected guests. Courses for which you are a team member appear above for you to edit, while course creator privileges are granted by edX. Our team is currently  evaluating your request.')}</p>
+            <p>${_('HEBS Studio is a hosted solution for our HEBS partners and selected guests. Courses for which you are a team member appear above for you to edit, while course creator privileges are granted by HEBS. Our team is currently  evaluating your request.')}</p>
           </div>
 
           <div class="status status-creationrights has-status is-pending">
@@ -369,7 +369,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
               <dd class="value">
                 <span class="status-indicator"></span>
                 <span class="value-formal">${_('Pending')}</span>
-                <span class="value-description">${_('Your request is currently being reviewed by edX staff and should be updated shortly.')}</span>
+                <span class="value-description">${_('Your request is currently being reviewed by HEBS staff and should be updated shortly.')}</span>
               </dd>
             </dl>
           </div>
@@ -380,16 +380,16 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
     </article>
     <aside class="content-supplementary" role="complimentary">
       <div class="bit">
-        <h3 class="title title-3">${_('New to edX Studio?')}</h3>
+        <h3 class="title title-3">${_('New to HEBS Studio?')}</h3>
         <p>${_('Click Help in the upper-right corner to get more information about the Studio page you are viewing. You can also use the links at the bottom of the page to access our continously updated documentation and other Studio resources.')}</p>
 
         <ol class="list-actions">
           <li class="action-item">
 
-            <a href="${get_online_help_info(online_help_token())['doc_url']}" target="_blank">${_("Getting Started with edX Studio")}</a>
+            <a href="${get_online_help_info(online_help_token())['doc_url']}" target="_blank">${_("Getting Started with HEBS Studio")}</a>
           </li>
           <li class="action-item">
-            <a href="http://help.edge.edx.org/discussion/new" class="show-tender" title="${_("Use our feedback tool, Tender, to request help")}">${_("Request help with edX Studio")}</a>
+            <a href="http://help.hebsonline.com/discussion/new" class="show-tender" title="${_("Use our feedback tool, Tender, to request help")}">${_("Request help with HEBS Studio")}</a>
           </li>
         </ol>
       </div>
@@ -397,7 +397,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
       % if course_creator_status=='disallowed_for_this_site' and settings.FEATURES.get('STUDIO_REQUEST_EMAIL',''):
       <div class="bit">
         <h3 class="title title-3">${_("Can I create courses in Studio?")}</h3>
-        <p>${_("In order to create courses in Studio, you must {link_start}contact edX staff to help you create a course{link_end}.").format(
+        <p>${_("In order to create courses in Studio, you must {link_start}contact HEBS staff to help you create a course{link_end}.").format(
             link_start='<a href="mailto:{email}">'.format(email=settings.FEATURES.get('STUDIO_REQUEST_EMAIL','')),
             link_end="</a>",
           )}</p>
@@ -413,9 +413,9 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
       % elif course_creator_status == "denied":
       <div class="bit">
         <h3 class="title title-3">${_("Can I create courses in Studio?")}</h3>
-        <p>${_("Your request to author courses in Studio has been denied. Please {link_start}contact edX Staff with further questions{link_end}.").format(
+        <p>${_("Your request to author courses in Studio has been denied. Please {link_start}contact HEBS Staff with further questions{link_end}.").format(
             link_start='<a href="{url}" class="show-tender">'.format(
-              url="http://help.edge.edx.org/discussion/new",
+              url="http://help.hebsonline.com/discussion/new",
             ),
             link_end="</a>",
           )}</p>
@@ -450,7 +450,7 @@ require(["domReady!", "jquery", "jquery.form", "js/index"], function(doc, $) {
 
         <ol class='list-actions'>
           <li class="action-item">
-            <a href="http://help.edge.edx.org/discussion/new" class="show-tender" title="${_("Use our feedback tool, Tender, to request help")}">${_("Request help with your Studio account")}</a>
+            <a href="http://help.hebsonline.com/discussion/new" class="show-tender" title="${_("Use our feedback tool, Tender, to request help")}">${_("Request help with your Studio account")}</a>
           </li>
         </ol>
       </div>
