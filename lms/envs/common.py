@@ -825,7 +825,7 @@ PAYMENT_SUPPORT_EMAIL = 'payment@example.com'
 
 ##### Using cybersource by default #####
 
-CC_PROCESSOR_NAME = 'PayPal'
+CC_PROCESSOR_NAME = 'CyberSource2'
 CC_PROCESSOR = {
     'CyberSource': {
         'SHARED_SECRET': '',
@@ -849,10 +849,10 @@ CC_PROCESSOR = {
         'PROCESS_URL': 'https://api-3t.sandbox.paypal.com/nvp',
     },
     'CyberSource2': {
-        "PURCHASE_ENDPOINT": '',
-        "SECRET_KEY": '',
-        "ACCESS_KEY": '',
-        "PROFILE_ID": '',
+        "PURCHASE_ENDPOINT": 'https://testsecureacceptance.cybersource.com/pay',
+        "SECRET_KEY": 'fake_secret_key',
+        "ACCESS_KEY": 'fake_access_key',
+        "PROFILE_ID": 'fake_profile_id',
     }
 }
 
