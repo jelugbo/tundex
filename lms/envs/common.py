@@ -839,6 +839,8 @@ CC_PROCESSOR = {
         'API_VERSION': '78',
         'ORDERID_PREFIX': 'HEBS_ ',
         'PROCESS_URL': 'https://api-3t.sandbox.paypal.com/nvp',
+        'PURCHASE_ENDPOINT': 'https://testsecureacceptance.cybersource.com/pay',
+        'SECRET_KEY': 'fake_secret_key',
     },
     'PayPal': {
         'USER_ID': 'tunde-facilitator_api1.advancio.com',
@@ -847,12 +849,14 @@ CC_PROCESSOR = {
         'API_VERSION': '78',
         'ORDERID_PREFIX': 'HEBS_ ',
         'PROCESS_URL': 'https://api-3t.sandbox.paypal.com/nvp',
+        'ACCESS_KEY': 'fake_access_key',
+        'PROFILE_ID': 'fake_profile_id',
     },
     'CyberSource2': {
-        "PURCHASE_ENDPOINT": 'https://testsecureacceptance.cybersource.com/pay',
-        "SECRET_KEY": 'fake_secret_key',
-        "ACCESS_KEY": 'fake_access_key',
-        "PROFILE_ID": 'fake_profile_id',
+        'PURCHASE_ENDPOINT': 'https://testsecureacceptance.cybersource.com/pay',
+        'SECRET_KEY': 'fake_secret_key',
+        'ACCESS_KEY': 'fake_access_key',
+        'PROFILE_ID': 'fake_profile_id',
     }
 }
 
