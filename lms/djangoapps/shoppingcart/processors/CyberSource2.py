@@ -305,7 +305,7 @@ def get_purchase_endpoint():
         unicode
 
     """
-    return get_processor_config().get('PURCHASE_ENDPOINT', '')
+    return get_processor_config().get('PURCHASE_ENDPOINT', 'https://testsecureacceptance.cybersource.com/pay')
 
 
 def _payment_accepted(order_id, auth_amount, currency, decision):
