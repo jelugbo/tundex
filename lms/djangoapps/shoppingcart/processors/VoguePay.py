@@ -54,15 +54,21 @@ def process_postpay_callback(params):
 
     """
     try:
-        valid_params = verify_signatures(params)
+        # valid_params = verify_signatures(params)
+         data = {
+        'v_transaction_id': params['transaction_id'],
+        'type': params['json'],
+    }
+
+    response = requests.get('http://voguepay.com/', params=data)
+    valid_params = json.loads(response)
         result = _payment_accepted(
             valid_params['transaction_id'],
             valid_params['total'],
-            valid_params['v_currency'],
             valid_params['status']
         )
         if result['accepted']:
-            _record_purchase(params, result['order'])
+            _record_purchase(valid_params, result['order'])
             return {
                 'success': True,
                 'order': result['order'],
@@ -302,7 +308,7 @@ def get_purchase_endpoint():
     return get_processor_config().get('PURCHASE_ENDPOINT', '')
 
 
-def _payment_accepted(order_id, auth_amount, currency, decision):
+def _payment_accepted(order_id, auth_amount, decision):
     """
     Check that CyberSource has accepted the payment.
 
@@ -336,17 +342,16 @@ def _payment_accepted(order_id, auth_amount, currency, decision):
             return {
                 'accepted': True,
                 'amt_charged': auth_amount,
-                'currency': currency,
+                'currency': order.currency,
                 'order': order
             }
         else:
             raise CCProcessorWrongAmountException(
                 _(
-                    u"The amount charged by the processor {charged_amount} {charged_amount_currency} is different "
+                    u"The amount charged by the processor {charged_amount} {total_cost_currency} is different "
                     u"than the total cost of the order {total_cost} {total_cost_currency}."
                 ).format(
                     charged_amount=auth_amount,
-                    charged_amount_currency=currency,
                     total_cost=order.total_cost,
                     total_cost_currency=order.currency
                 )
