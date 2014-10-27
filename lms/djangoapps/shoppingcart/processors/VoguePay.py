@@ -17,6 +17,7 @@ import hmac
 import binascii
 import re
 import json
+from urllib2 import urlopen
 import uuid
 import requests
 from textwrap import dedent
@@ -56,13 +57,17 @@ def process_postpay_callback(params):
     """
     try:
         # valid_params = verify_signatures(params)
-         data = {
-        'v_transaction_id': params['transaction_id'],
-        'type': params['json']
-    }
+    #      data = {
+    #     'v_transaction_id': params['transaction_id'],
+    #     'type': params['json']
+    # }
 
-    v_response = requests.get('http://voguepay.com/', params=data)
-    valid_params = json.loads(v_response)
+        data = urlopen(
+        "http://voguepay.com/?v_transaction_id=%s&type=%s"
+        % (params['transaction_id'],'json'))
+
+    # v_response = requests.get('http://voguepay.com/', params=data)
+    valid_params = json.loads(data)
         result = _payment_accepted(
             valid_params['transaction_id'],
             valid_params['total'],
