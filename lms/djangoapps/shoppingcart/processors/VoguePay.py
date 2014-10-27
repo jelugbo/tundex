@@ -65,9 +65,10 @@ def process_postpay_callback(params):
         data = urlopen(
         "http://voguepay.com/?v_transaction_id=%s&type=%s"
         % (params['transaction_id'],'json'))
+        valid_params = json.loads(data.read().decode('utf-8'))
 
     # v_response = requests.get('http://voguepay.com/', params=data)
-    valid_params = json.loads(data)
+    # valid_params = json.loads(data)
         result = _payment_accepted(
             valid_params['transaction_id'],
             valid_params['total'],
