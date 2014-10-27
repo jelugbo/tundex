@@ -56,10 +56,10 @@ def process_postpay_callback(params):
     try:
         valid_params = verify_signatures(params)
         result = _payment_accepted(
-            valid_params['req_reference_number'],
-            valid_params['auth_amount'],
-            valid_params['req_currency'],
-            valid_params['decision']
+            valid_params['transaction_id'],
+            valid_params['total'],
+            valid_params['v_currency'],
+            valid_params['status']
         )
         if result['accepted']:
             _record_purchase(params, result['order'])
@@ -262,7 +262,7 @@ def get_purchase_params(cart, callback_url=None, extra_data=None):
     params = OrderedDict()
 
     params['total'] = amount
-    #params['currency'] = cart.currency
+    params['v_currency'] = cart.currency
     #params['orderNumber'] = "OrderId: {0:d}".format(cart.id)
 
     params['v_merchant_id'] = get_processor_config().get('MERCHANT_ID', '')
@@ -299,7 +299,7 @@ def get_purchase_endpoint():
         unicode
 
     """
-    return get_processor_config().get('PURCHASE_ENDPOINT', 'https://testsecureacceptance.cybersource.com/pay')
+    return get_processor_config().get('PURCHASE_ENDPOINT', '')
 
 
 def _payment_accepted(order_id, auth_amount, currency, decision):
@@ -331,7 +331,7 @@ def _payment_accepted(order_id, auth_amount, currency, decision):
     except Order.DoesNotExist:
         raise CCProcessorDataException(_("The payment processor accepted an order whose number is not in our system."))
 
-    if decision == 'ACCEPT':
+    if decision == 'Approved':
         if auth_amount == order.total_cost and currency == order.currency:
             return {
                 'accepted': True,
@@ -372,28 +372,28 @@ def _record_purchase(params, order):
         None
 
     """
-    # Usually, the credit card number will have the form "xxxxxxxx1234"
-    # Parse the string to retrieve the digits.
-    # If we can't find any digits, use placeholder values instead.
-    ccnum_str = params.get('req_card_number', '')
-    mm = re.search("\d", ccnum_str)
-    if mm:
-        ccnum = ccnum_str[mm.start():]
-    else:
-        ccnum = "####"
+    # # Usually, the credit card number will have the form "xxxxxxxx1234"
+    # # Parse the string to retrieve the digits.
+    # # If we can't find any digits, use placeholder values instead.
+    # ccnum_str = params.get('req_card_number', '')
+    # mm = re.search("\d", ccnum_str)
+    # if mm:
+    #     ccnum = ccnum_str[mm.start():]
+    # else:
+    #     ccnum = "####"
 
     # Mark the order as purchased and store the billing information
     order.purchase(
-        first=params.get('req_bill_to_forename', ''),
-        last=params.get('req_bill_to_surname', ''),
-        street1=params.get('req_bill_to_address_line1', ''),
-        street2=params.get('req_bill_to_address_line2', ''),
-        city=params.get('req_bill_to_address_city', ''),
-        state=params.get('req_bill_to_address_state', ''),
-        country=params.get('req_bill_to_address_country', ''),
-        postalcode=params.get('req_bill_to_address_postal_code', ''),
-        ccnum=ccnum,
-        cardtype=CARDTYPE_MAP[params.get('req_card_type', '')],
+        # first=params.get('req_bill_to_forename', ''),
+        # last=params.get('req_bill_to_surname', ''),
+        # street1=params.get('req_bill_to_address_line1', ''),
+        # street2=params.get('req_bill_to_address_line2', ''),
+        # city=params.get('req_bill_to_address_city', ''),
+        # state=params.get('req_bill_to_address_state', ''),
+        # country=params.get('req_bill_to_address_country', ''),
+        # postalcode=params.get('req_bill_to_address_postal_code', ''),
+        # ccnum=ccnum,
+        # cardtype=CARDTYPE_MAP[params.get('req_card_type', '')],
         processor_reply_dump=json.dumps(params)
     )
 

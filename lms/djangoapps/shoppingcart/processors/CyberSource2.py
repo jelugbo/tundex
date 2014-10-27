@@ -63,10 +63,10 @@ def process_postpay_callback(params):
     try:
         valid_params = verify_signatures(params)
         result = _payment_accepted(
-            valid_params['req_reference_number'],
-            valid_params['auth_amount'],
-            valid_params['req_currency'],
-            valid_params['decision']
+            valid_params['transaction_id'],
+            valid_params['total'],
+            valid_params['v_currency'],
+            valid_params['status']
         )
         if result['accepted']:
             _record_purchase(params, result['order'])
@@ -337,7 +337,7 @@ def _payment_accepted(order_id, auth_amount, currency, decision):
     except Order.DoesNotExist:
         raise CCProcessorDataException(_("The payment processor accepted an order whose number is not in our system."))
 
-    if decision == 'ACCEPT':
+    if decision == 'Approved':
         if auth_amount == order.total_cost and currency == order.currency:
             return {
                 'accepted': True,
