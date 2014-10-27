@@ -1,25 +1,18 @@
 """
-Implementation of the CyberSource credit card processor using the newer "Secure Acceptance API".
-The previous Hosted Order Page API is being deprecated as of 9/14.
+Implementation the VoguePay credit card processor.
 
-For now, we're keeping the older implementation in the code-base so we can
-quickly roll-back by updating the configuration.  Eventually, we should replace
-the original implementation with this version.
+To enable this implementation, add the following to Django settings:
 
-To enable this implementation, add the following Django settings:
-
-    CC_PROCESSOR_NAME = "CyberSource2"
+    CC_PROCESSOR_NAME = "VoguePay"
     CC_PROCESSOR = {
-        "CyberSource2": {
-            "SECRET_KEY": "<secret key>",
-            "ACCESS_KEY": "<access key>",
-            "PROFILE_ID": "<profile ID>",
+        "VoguePay": {
+            "MERCHANT_ID": "<merchant ID>",
+            "ORDER_PREFIX": "<serial number>",
             "PURCHASE_ENDPOINT": "<purchase endpoint>"
         }
     }
 
 """
-
 import hmac
 import binascii
 import re
@@ -204,7 +197,7 @@ def render_purchase_form_html(cart, callback_url=None, extra_data=None):
         cart (Order): The order model representing items in the user's cart.
 
     Keyword Args:
-        return_url (unicode): The URL that CyberSource should POST to when the user
+        callback_url (unicode): The URL that CyberSource should POST to when the user
             completes a purchase.  If not provided, then CyberSource will use
             the URL provided by the administrator of the account
             (CyberSource config, not LMS config).
@@ -231,7 +224,7 @@ def get_signed_purchase_params(cart, callback_url=None, extra_data=None):
         cart (Order): The order model representing items in the user's cart.
 
     Keyword Args:
-        return_url (unicode): The URL that CyberSource should POST to when the user
+        callback_url (unicode): The URL that CyberSource should POST to when the user
             completes a purchase.  If not provided, then CyberSource will use
             the URL provided by the administrator of the account
             (CyberSource config, not LMS config).
@@ -253,19 +246,12 @@ def get_purchase_params(cart, callback_url=None, extra_data=None):
         cart (Order): The order model representing items in the user's cart.
 
     Keyword Args:
-        return_url (unicode): The URL that CyberSource should POST to when the user
+        callback_url (unicode): The URL that CyberSource should POST to when the user
             completes a purchase.  If not provided, then CyberSource will use
             the URL provided by the administrator of the account
             (CyberSource config, not LMS config).
 
         extra_data (list): Additional data to include as merchant-defined data fields.
-        v_merchant_id
-        merchant_ref
-        memo
-        success_url
-        fail_url
-        notify_url
-        total
 
     Returns:
         dict
@@ -275,25 +261,26 @@ def get_purchase_params(cart, callback_url=None, extra_data=None):
     amount = "{0:0.2f}".format(total_cost)
     params = OrderedDict()
 
-    params['amount'] = amount
-    params['currency'] = cart.currency
-    params['orderNumber'] = "OrderId: {0:d}".format(cart.id)
+    params['total'] = amount
+    #params['currency'] = cart.currency
+    #params['orderNumber'] = "OrderId: {0:d}".format(cart.id)
 
-    params['access_key'] = get_processor_config().get('ACCESS_KEY', '')
-    params['profile_id'] = get_processor_config().get('PROFILE_ID', '')
+    params['v_merchant_id'] = get_processor_config().get('MERCHANT_ID', '')
+    params['order_prefix'] = get_processor_config().get('ORDER_PREFIX', '')
     params['merchant_ref'] = cart.id
-    params['transaction_type'] = 'sale'
+    #params['transaction_type'] = 'sale'
 
-    params['locale'] = 'en'
+    #params['locale'] = 'en'
     params['signed_date_time'] =  datetime.utcnow().strftime('%Y-%m-%dT%H:%M:%SZ')
     params['signed_field_names'] = 'access_key,profile_id,amount,currency,transaction_type,reference_number,signed_date_time,locale,transaction_uuid,signed_field_names,unsigned_field_names,orderNumber'
     params['unsigned_field_names'] = ''
-    params['transaction_uuid'] = uuid.uuid4().hex
-    params['payment_method'] = 'card'
+   # params['transaction_uuid'] = uuid.uuid4().hex
+   # params['payment_method'] = 'card'
 
     if callback_url is not None:
-        params['override_custom_receipt_page'] = callback_url
-        params['override_custom_cancel_page'] = callback_url
+        params['success_url'] = callback_url
+        params['notify_url'] = callback_url
+        params['fail_url'] = callback_url
 
     if extra_data is not None:
         # CyberSource allows us to send additional data in "merchant defined data" fields
@@ -312,7 +299,7 @@ def get_purchase_endpoint():
         unicode
 
     """
-    return get_processor_config().get('PURCHASE_ENDPOINT', '')
+    return get_processor_config().get('PURCHASE_ENDPOINT', 'https://testsecureacceptance.cybersource.com/pay')
 
 
 def _payment_accepted(order_id, auth_amount, currency, decision):
