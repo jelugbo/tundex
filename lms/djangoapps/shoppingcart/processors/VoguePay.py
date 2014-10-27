@@ -70,7 +70,7 @@ def process_postpay_callback(params):
     # v_response = requests.get('http://voguepay.com/', params=data)
     # valid_params = json.loads(data)
         result = _payment_accepted(
-            valid_params['transaction_id'],
+            valid_params['merchant_ref'],
             valid_params['total'],
             valid_params['status']
         )
