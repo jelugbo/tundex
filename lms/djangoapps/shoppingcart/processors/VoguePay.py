@@ -18,6 +18,7 @@ import binascii
 import re
 import json
 import uuid
+import requests
 from textwrap import dedent
 from datetime import datetime
 from collections import OrderedDict, defaultdict
