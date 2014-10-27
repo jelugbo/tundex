@@ -843,10 +843,10 @@ CC_PROCESSOR = {
         'SECRET_KEY': 'fake_secret_key',
     },
     'VoguePay': {
-            "MERCHANT_ID": "demo",
-            "ORDER_PREFIX": "HEBS_",
-            "PURCHASE_ENDPOINT": "https://voguepay.com/pay/"
-        }
+        "MERCHANT_ID": "demo",
+        "ORDER_PREFIX": "HEBS_",
+        "PURCHASE_ENDPOINT": "https://voguepay.com/pay/"
+    
     },
     'PayPal': {
         'USER_ID': 'tunde-facilitator_api1.advancio.com',
@@ -859,10 +859,10 @@ CC_PROCESSOR = {
         'PROFILE_ID': 'fake_profile_id',
     },
     'CyberSource2': {
-        'PURCHASE_ENDPOINT': 'https://testsecureacceptance.cybersource.com/pay',
-        'SECRET_KEY': 'fake_secret_key',
-        'ACCESS_KEY': 'fake_access_key',
-        'PROFILE_ID': 'fake_profile_id',
+        "PURCHASE_ENDPOINT": 'https://testsecureacceptance.cybersource.com/pay',
+        "SECRET_KEY": "fake_secret_key",
+        "ACCESS_KEY": 'fake_access_key',
+        "PROFILE_ID": 'fake_profile_id',
     }
 }
 
