@@ -57,7 +57,7 @@ def process_postpay_callback(params):
         # valid_params = verify_signatures(params)
          data = {
         'v_transaction_id': params['transaction_id'],
-        'type': params['json'],
+        'type': params['json']
     }
 
     response = requests.get('http://voguepay.com/', params=data)
