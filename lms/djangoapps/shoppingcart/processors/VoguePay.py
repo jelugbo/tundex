@@ -424,7 +424,6 @@ def _get_processor_decline_html(params):
             "Contact us with payment-related questions at {email}."
         ).format(
             decision='<span class="decision">{decision}</span>'.format(decision=params['status'])
-            
             ),
             email=payment_support_email
         )
