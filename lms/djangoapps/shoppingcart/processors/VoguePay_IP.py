@@ -56,18 +56,26 @@ def process_postpay_callback(params):
 
     """
     try:
+        # valid_params = verify_signatures(params)
+    #      data = {
+    #     'v_transaction_id': params['transaction_id'],
+    #     'type': params['json']
+    # }
+
         data = urlopen(
         "http://voguepay.com/?v_transaction_id=%s&type=%s"
         % (params['transaction_id'],'json'))
-        v_params = json.loads(data.read().decode('utf-8'))
-        valid_params =verify_signatures(v_params)
+        valid_params = json.loads(data.read().decode('utf-8'))
+
+    # v_response = requests.get('http://voguepay.com/', params=data)
+    # valid_params = json.loads(data)
         result = _payment_accepted(
             valid_params['merchant_ref'],
-            valid_params['total_paid_by_buyer'],
+            valid_params['total'],
             valid_params['status']
         )
         if result['accepted']:
-            _record_purchase(v_params, result['order'])
+            _record_purchase(valid_params, result['order'])
             return {
                 'success': True,
                 'order': result['order'],
@@ -127,7 +135,7 @@ def verify_signatures(params):
 
     # First see if the user cancelled the transaction
     # if so, then not all parameters will be passed back so we can't yet verify signatures
-    if params.get('status') == u'Pending':
+    if params.get('decision') == u'CANCEL':
         raise CCProcessorUserCancelled()
 
     # Validate the signature to ensure that the message is from CyberSource
@@ -135,8 +143,8 @@ def verify_signatures(params):
     signed_fields = params.get('signed_field_names', '').split(',')
     data = u",".join([u"{0}={1}".format(k, params.get(k, '')) for k in signed_fields])
     returned_sig = params.get('signature', '')
-   # if processor_hash(data) != returned_sig:
-    #    raise CCProcessorSignatureException()
+    if processor_hash(data) != returned_sig:
+        raise CCProcessorSignatureException()
 
     # Validate that we have the paramters we expect and can convert them
     # to the appropriate types.
@@ -145,10 +153,10 @@ def verify_signatures(params):
     # which fields they included in the signature, we need to be careful.
     valid_params = {}
     required_params = [
-        ('merchant_ref', int),
-       # ('req_currency', str),
-        ('status', str),
-        ('total_paid_by_buyer', Decimal),
+        ('req_reference_number', int),
+        ('req_currency', str),
+        ('decision', str),
+        ('auth_amount', Decimal),
     ]
     for key, key_type in required_params:
         if key not in params:
@@ -337,8 +345,6 @@ def _payment_accepted(order_id, auth_amount, decision):
         raise CCProcessorDataException(_("The payment processor accepted an order whose number is not in our system."))
 
     if decision == 'Approved':
-       # auth_amt = "{0:0.2f}".format(float(auth_amount))
-        
         if auth_amount == order.total_cost:
             return {
                 'accepted': True,
