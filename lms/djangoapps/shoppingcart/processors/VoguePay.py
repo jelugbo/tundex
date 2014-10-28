@@ -77,7 +77,7 @@ def process_postpay_callback(params):
             return {
                 'success': False,
                 'order': result['order'],
-                'error_html': _get_processor_decline_html(params)
+                'error_html': _get_processor_decline_html(v_params)
             }
     except CCProcessorException as error:
         return {
@@ -419,15 +419,12 @@ def _get_processor_decline_html(params):
     return _format_error_html(
         _(
             "Sorry! Our payment processor did not accept your payment.  "
-            "The decision they returned was {decision}, "
-            "and the reason was {reason}.  "
+            "The reason they returned was {decision}. "
             "You were not charged. Please try a different form of payment.  "
             "Contact us with payment-related questions at {email}."
         ).format(
-            decision='<span class="decision">{decision}</span>'.format(decision=params['decision']),
-            reason='<span class="reason">{reason_code}:{reason_msg}</span>'.format(
-                reason_code=params['reason_code'],
-                reason_msg=REASONCODE_MAP.get(params['reason_code'])
+            decision='<span class="decision">{decision}</span>'.format(decision=params['status'])
+            
             ),
             email=payment_support_email
         )
