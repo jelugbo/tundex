@@ -98,7 +98,7 @@
         % if microsite.get_value('ENABLE_THIRD_PARTY_AUTH', settings.FEATURES.get('ENABLE_THIRD_PARTY_AUTH')):
         <li class="controls--account">
           <span class="title">
-            ## Translators: this section lists all the third-party authentication providers (for example, Google and LinkedIn) the user can link with or unlink from their edX account.
+            ## Translators: this section lists all the third-party authentication providers (for example, Google and LinkedIn) the user can link with or unlink from their HEBS account.
             ${_("Connected Accounts")}
           </span>
 
@@ -127,12 +127,12 @@
                   <input type="hidden" name="csrfmiddlewaretoken" value="${csrf_token}">
 
                   <a href="#" onclick="document.${state.get_unlink_form_name()}.submit()">
-                    ## Translators: clicking on this removes the link between a user's edX account and their account with an external authentication provider (like Google or LinkedIn).
+                    ## Translators: clicking on this removes the link between a user's HEBS account and their account with an external authentication provider (like Google or LinkedIn).
                     ${_("Unlink")}
                   </a>
                 % else:
                   <a href="${pipeline.get_login_url(state.provider.NAME, pipeline.AUTH_ENTRY_DASHBOARD)}">
-                    ## Translators: clicking on this creates a link between a user's edX account and their account with an external authentication provider (like Google or LinkedIn).
+                    ## Translators: clicking on this creates a link between a user's HEBS account and their account with an external authentication provider (like Google or LinkedIn).
                     ${_("Link")}
                   </a>
               % endif

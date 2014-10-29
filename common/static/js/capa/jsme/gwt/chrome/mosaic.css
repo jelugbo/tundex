@@ -26,7 +26,7 @@
   zoom: 1;
 }
 
-/* Commented out the following that was messing up the CSS in sequential and had no use anyway when jsme is running inside edX platform.
+/* Commented out the following that was messing up the CSS in sequential and had no use anyway when jsme is running inside HEBS platform.
 
 body {
 	font-family: arial,sans-serif;

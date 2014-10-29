@@ -2,7 +2,7 @@
 
 -e git+https://github.com/gsehub/xblock-mentoring.git@4d1cce78dc232d5da6ffd73817b5c490e87a6eee#egg=xblock-mentoring
 
-# Prototype XBlocks from edX learning sciences limited roll-outs and user testing. 
+# Prototype XBlocks from HEBS learning sciences limited roll-outs and user testing. 
 # Concept XBlock, in particular, is nowhere near finished and an early prototype. 
 # Profile XBlock is there so we can play with XBlock arguments in the platform, but isn't ready for use outside of
 # edX.

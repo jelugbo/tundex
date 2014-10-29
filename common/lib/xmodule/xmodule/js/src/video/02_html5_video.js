@@ -3,7 +3,7 @@
  * HTML5 video player.
  *
  * The goal was to write this module so that it closely resembles the YouTube
- * API. The main reason for this is because initially the edX video player
+ * API. The main reason for this is because initially the HEBS video player
  * supported only YouTube videos. When HTML5 support was added, for greater
  * compatibility, and to reduce the amount of code that needed to be modified,
  * it was decided to write a similar API as the one provided by YouTube.

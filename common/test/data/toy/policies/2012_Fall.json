@@ -151,11 +151,11 @@
                 },
                 {
                     "action_external": true,
-                    "short_description": "Enroll in edX 101",
+                    "short_description": "Enroll in HEBS 101",
                     "action_url": "https://edge.edx.org/courses/edX/edX101/How_to_Create_an_edX_Course/about",
-                    "action_text": "Register for edX 101",
+                    "action_text": "Register for HEBS 101",
                     "is_checked": false,
-                    "long_description": "Register for edX 101, edX's primer for course creation."
+                    "long_description": "Register for HEBS 101, HEBS's primer for course creation."
                 },
                 {
                     "action_external": true,
@@ -176,7 +176,7 @@
                     "action_url": "SettingsDetails",
                     "action_text": "Edit Course Schedule &amp; Details",
                     "is_checked": false,
-                    "long_description": "Courses on edX have an About page that includes a course video, description, and more. Draft the text students will read before deciding to enroll in your course."
+                    "long_description": "Courses on HEBS have an About page that includes a course video, description, and more. Draft the text students will read before deciding to enroll in your course."
                 },
                 {
                     "action_external": false,

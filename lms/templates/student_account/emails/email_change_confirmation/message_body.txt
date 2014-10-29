@@ -16,4 +16,4 @@ ${_("You successfully changed the email address associated with your "
 
 ## Farewell
 ${_("Thanks,")}
-${_("- The edX Team")}
+${_("- The HEBS Team")}

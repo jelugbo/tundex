@@ -174,7 +174,7 @@ tinymce.PluginManager.add("link", function(e) {
                 var i = t.data;
                 e.fire('SaveLink', i);
                 var r = i.href;
-                /* EDX - Change the email address detection, which mistakenly detected Split asset keys as email addresses.
+                /* HEBS - Change the email address detection, which mistakenly detected Split asset keys as email addresses.
                          Instead, if the link has a "@" sign *and* a colon, do not consider it an email address. */
                 return r ? r.indexOf("@") > 0 && -1 == r.indexOf("//") && -1 == r.indexOf(":") ? void n("The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?", function(e) {
                     e && (r = "mailto:" + r), l()

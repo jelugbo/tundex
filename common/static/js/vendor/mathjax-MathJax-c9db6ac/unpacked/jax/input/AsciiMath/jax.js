@@ -450,7 +450,7 @@ var AMsymbols = [
 {input:"QQ",  tag:"mo", output:"\u211A", tex:null, ttype:CONST},
 {input:"RR",  tag:"mo", output:"\u211D", tex:null, ttype:CONST},
 {input:"ZZ",  tag:"mo", output:"\u2124", tex:null, ttype:CONST},
-// not for edX (ichuang jun12)
+// not for HEBS (ichuang jun12)
 //{input:"f",   tag:"mi", output:"f",      tex:null, ttype:UNARY, func:true},
 //{input:"g",   tag:"mi", output:"g",      tex:null, ttype:UNARY, func:true},
 

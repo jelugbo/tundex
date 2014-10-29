@@ -10,7 +10,7 @@ Instructions for creating js/tinymce.full.min.js
 Instructions for updating tinymce to a newer version:
 
 1. Download the desired version from https://github.com/tinymce/tinymce/releases
-2. Find all the EDX specific changes that were made to the currently used version of tinymce by searching for
-   the string "EDX" in this directory.
-3. Merge the EDX specific changes with the new version.
+2. Find all the HEBS specific changes that were made to the currently used version of tinymce by searching for
+   the string "HEBS" in this directory.
+3. Merge the HEBS specific changes with the new version.
 4. Follow the instructions above for creating the new version of js/tinymce.full.min.js

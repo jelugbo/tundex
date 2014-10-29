@@ -71,7 +71,7 @@ no hard standards.
   should be broken down into small commits for integration.
 * Every piece of production and deployed code must be reviewed prior
   to integration.
-* Anyone on the edX team competent to review a piece of code may
+* Anyone on the HEBS team competent to review a piece of code may
   review it (this may change as the team grows). 
 * Each contributor is responsible for finding a person to review their
   code. If it is not clear to the contributor who is appropriate, each
