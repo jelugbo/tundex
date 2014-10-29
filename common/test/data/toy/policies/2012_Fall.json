@@ -144,7 +144,7 @@
                 {
                     "action_external": true,
                     "short_description": "Explore the Studio Help Forum",
-                    "action_url": "http://help.edge.edx.org/",
+                    "action_url": "http://help.edge.hebsonline.com/",
                     "action_text": "Visit Studio Help",
                     "is_checked": false,
                     "long_description": "Access the Studio Help forum from the menu that appears when you click your user name in the top right corner of Studio."
@@ -152,7 +152,7 @@
                 {
                     "action_external": true,
                     "short_description": "Enroll in HEBS 101",
-                    "action_url": "https://edge.edx.org/courses/edX/edX101/How_to_Create_an_edX_Course/about",
+                    "action_url": "https://edge.hebsonline.com/courses/edX/edX101/How_to_Create_an_edX_Course/about",
                     "action_text": "Register for HEBS 101",
                     "is_checked": false,
                     "long_description": "Register for HEBS 101, HEBS's primer for course creation."

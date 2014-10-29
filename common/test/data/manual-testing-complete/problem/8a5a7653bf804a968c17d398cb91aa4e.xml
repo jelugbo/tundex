@@ -6,7 +6,7 @@
   </p>
   <p>Which animal shown below is a kitten?</p>
   <imageresponse>
-    <imageinput src="https://studio.edx.org/c4x/edX/DemoX/asset/Dog-and-Cat.jpg" width="640" height="400" rectangle="(385,98)-(600,337)"/>
+    <imageinput src="https://studio.hebsonline.com/c4x/edX/DemoX/asset/Dog-and-Cat.jpg" width="640" height="400" rectangle="(385,98)-(600,337)"/>
   </imageresponse>
   <solution>
     <div class="detailed-solution">
