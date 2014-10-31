@@ -28,18 +28,18 @@ define(['js/student_account/account'],
             beforeEach(function() {
                 account = new edx.student.account.AccountModel();
                 account.set({
-                    email: "bob@example.com",
+                    email: "bob@hebsonline.com",
                     password: "password"
                 });
             });
 
             it("accepts valid email addresses", function() {
-                assertValid({email: "bob@example.com"}, true);
-                assertValid({email: "bob+smith@example.com"}, true);
-                assertValid({email: "bob+smith@example.com"}, true);
-                assertValid({email: "bob+smith@example.com"}, true);
-                assertValid({email: "bob@test.example.com"}, true);
-                assertValid({email: "bob@test-example.com"}, true);
+                assertValid({email: "bob@hebsonline.com"}, true);
+                assertValid({email: "bob+smith@hebsonline.com"}, true);
+                assertValid({email: "bob+smith@hebsonline.com"}, true);
+                assertValid({email: "bob+smith@hebsonline.com"}, true);
+                assertValid({email: "bob@test.hebsonline.com"}, true);
+                assertValid({email: "bob@test-hebsonline.com"}, true);
             });
 
             it("rejects blank email addresses", function() {
@@ -51,18 +51,18 @@ define(['js/student_account/account'],
                 assertValid({email: "bob"}, false, EXPECTED_ERRORS.email);
                 assertValid({email: "bob@example"}, false, EXPECTED_ERRORS.email);
                 assertValid({email: "@"}, false, EXPECTED_ERRORS.email);
-                assertValid({email: "@example.com"}, false, EXPECTED_ERRORS.email);
+                assertValid({email: "@hebsonline.com"}, false, EXPECTED_ERRORS.email);
 
                 // The server will reject emails with non-ASCII unicode
                 // Technically these are valid email addresses, but the email validator
                 // in Django 1.4 will reject them anyway, so we should too.
-                assertValid({email: "fŕáńḱ@example.com"}, false, EXPECTED_ERRORS.email);
+                assertValid({email: "fŕáńḱ@hebsonline.com"}, false, EXPECTED_ERRORS.email);
                 assertValid({email: "frank@éxáḿṕĺé.com"}, false, EXPECTED_ERRORS.email);
             });
 
             it("rejects a long email address", function() {
                 // Construct an email exactly one character longer than the maximum length
-                var longEmail = new Array(account.EMAIL_MAX_LENGTH - 10).join("e") + "@example.com";
+                var longEmail = new Array(account.EMAIL_MAX_LENGTH - 10).join("e") + "@hebsonline.com";
                 assertValid({email: longEmail}, false, EXPECTED_ERRORS.email);
             });
 
@@ -139,9 +139,9 @@ define(['js/student_account/account'],
             });
 
             it("requests an email address change", function() {
-                requestEmailChange("bob@example.com", "password");
+                requestEmailChange("bob@hebsonline.com", "password");
                 assertAjax("email", "POST", {
-                    email: "bob@example.com",
+                    email: "bob@hebsonline.com",
                     password: "password"
                 });
                 assertStatus(view.$requestStatus, true, "error", "Please check your email to confirm the change");
@@ -153,29 +153,29 @@ define(['js/student_account/account'],
                 assertStatus(view.$emailStatus, false, "validation-error", "Please enter a valid email address");
 
                 // Once the error is fixed, the status should return to normal
-                requestEmailChange("bob@example.com", "password");
+                requestEmailChange("bob@hebsonline.com", "password");
                 assertStatus(view.$emailStatus, true, "validation-error", "");
             });
 
             it("displays an invalid password error", function() {
                 // Password cannot be empty
-                requestEmailChange("bob@example.com", "");
+                requestEmailChange("bob@hebsonline.com", "");
                 assertStatus(view.$passwordStatus, false, "validation-error", "Please enter a valid password");
 
                 // Once the error is fixed, the status should return to normal
-                requestEmailChange("bob@example.com", "password");
+                requestEmailChange("bob@hebsonline.com", "password");
                 assertStatus(view.$passwordStatus, true, "validation-error", "");
             });
 
             it("displays server errors", function() {
                 // Simulate an error from the server
                 ajaxSuccess = false;
-                requestEmailChange("bob@example.com", "password");
+                requestEmailChange("bob@hebsonline.com", "password");
                 assertStatus(view.$requestStatus, false, "error", "The data could not be saved.");
 
                 // On retry, it should succeed
                 ajaxSuccess = true;
-                requestEmailChange("bob@example.com", "password");
+                requestEmailChange("bob@hebsonline.com", "password");
                 assertStatus(view.$requestStatus, true, "error", "Please check your email to confirm the change");
             });
 

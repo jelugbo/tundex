@@ -27,10 +27,10 @@
 
     // The text that appears on the upper part of the dialog box when
     // entering links.
-    var linkDialogText = "<p><b>" + gettext("Insert Hyperlink") + "</b></p><p>http://example.com/ " +
+    var linkDialogText = "<p><b>" + gettext("Insert Hyperlink") + "</b></p><p>http://hebsonline.com/ " +
 	// Translators: Please keep the quotation marks (") around this text
 	gettext("\"optional title\"") + "</p>";
-    var imageDialogText = "<p><b>" + gettext("Insert Image (upload file or type url)") + "</b></p><p>http://example.com/images/diagram.jpg " +
+    var imageDialogText = "<p><b>" + gettext("Insert Image (upload file or type url)") + "</b></p><p>http://hebsonline.com/images/diagram.jpg " +
 	// Translators: Please keep the quotation marks (") around this text
 	gettext("\"optional title\"") + "<br><br></p>";
 

@@ -204,10 +204,10 @@ describe('Transcripts.Utils', function () {
 
             var html5WrongUrls = [
                 'http://youtu.be/',
-                'http://example.com/.mp4',
-                'http://example.com/video_name.',
-                'http://example.com/',
-                'http://example.com'
+                'http://hebsonline.com/.mp4',
+                'http://hebsonline.com/video_name.',
+                'http://hebsonline.com/',
+                'http://hebsonline.com'
             ];
 
             $.each(html5WrongUrls, function (index, link) {
@@ -247,7 +247,7 @@ describe('Transcripts.Utils', function () {
                 }
             },
             'incorrect': {
-                link: 'http://example.com',
+                link: 'http://hebsonline.com',
                 resp: {
                     mode: 'incorrect'
                 }

@@ -38,7 +38,7 @@ function (Initialize) {
                         setItem: jasmine.createSpy()
                     },
                     config: {
-                        saveStateUrl: 'http://example.com/save_user_state'
+                        saveStateUrl: 'http://hebsonline.com/save_user_state'
                     }
                 };
 

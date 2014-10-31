@@ -7824,7 +7824,7 @@ $.extend( $.IIIF1_1TileSource.prototype, $.TileSource.prototype, {
     // IIIF 1.1 Info Looks like this (XML syntax is no more):
     // {
     //   "@context" : "http://library.stanford.edu/iiif/image-api/1.1/context.json",
-    //   "@id" : "http://iiif.example.com/prefix/1E34750D-38DB-4825-A38A-B60A345E591C",
+    //   "@id" : "http://iiif.hebsonline.com/prefix/1E34750D-38DB-4825-A38A-B60A345E591C",
     //   "width" : 6000,
     //   "height" : 4000,
     //   "scale_factors" : [ 1, 2, 4 ],

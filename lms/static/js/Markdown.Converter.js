@@ -421,7 +421,7 @@ else
             text = _DoImages(text);
             text = _DoAnchors(text);
 
-            // Make links out of things like `<http://example.com/>`
+            // Make links out of things like `<http://hebsonline.com/>`
             // Must come after _DoAnchors(), because you can use < and >
             // delimiters in inline links like [this](<url>).
             text = _DoAutoLinks(text);
@@ -1204,7 +1204,7 @@ else
             // must be preceded by space/BOF and followed by non-word/EOF character    
             text = text.replace(/(^|\s)(https?|ftp)(:\/\/[-A-Z0-9+&@#\/%?=~_|\[\]\(\)!:,\.;]*[-A-Z0-9+&@#\/%=~_|\[\]])($|\W)/gi, "$1<$2$3>$4");
 
-            //  autolink anything like <http://example.com>
+            //  autolink anything like <http://hebsonline.com>
             
             var replacer = function (wholematch, m1) { return "<a href=\"" + m1 + "\">" + pluginHooks.plainLinkText(m1) + "</a>"; }
             text = text.replace(/<((https?|ftp):[^'">\s]+)>/gi, replacer);
